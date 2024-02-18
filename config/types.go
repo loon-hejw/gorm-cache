@@ -4,10 +4,6 @@ import (
 	"time"
 )
 
-const (
-	CachePlugin = "gorm:cache"
-)
-
 type Cache struct {
 	Type  string `yaml:"type,omitempty"`
 	Redis Redis  `yaml:"redis,omitempty"`
@@ -15,7 +11,8 @@ type Cache struct {
 		DefaultExpiration time.Duration `yaml:"defaultExpiration,omitempty"`
 		CleanupInterval   time.Duration `yaml:"cleanupInterval,omitempty"`
 	} `yaml:"local,omitempty"`
-	Expiration time.Duration `yaml:"expiration,omitempty"`
+	Expiration time.Duration     `yaml:"expiration,omitempty"`
+	Config     map[string]string `yaml:"config,omitempty"`
 }
 
 type Redis struct {

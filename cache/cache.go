@@ -3,12 +3,10 @@ package cache
 import (
 	"sync"
 
-	"github.com/spf13/viper"
-
-	"github.com/hejw123/gorm-cache/cache/local"
-	"github.com/hejw123/gorm-cache/cache/redis"
-	"github.com/hejw123/gorm-cache/cache/types"
-	"github.com/hejw123/gorm-cache/config"
+	"github.com/loon-hejw/gorm-cache/cache/local"
+	"github.com/loon-hejw/gorm-cache/cache/redis"
+	"github.com/loon-hejw/gorm-cache/cache/types"
+	"github.com/loon-hejw/gorm-cache/config"
 )
 
 type Cache interface {
@@ -17,22 +15,29 @@ type Cache interface {
 	Del(key string) error
 }
 
+type GetCache func(cfg *config.Cache) Cache
+
 var (
-	cache Cache
-	once  = sync.Once{}
+	cache    Cache
+	once     = sync.Once{}
+	cacheMap = make(map[string]GetCache)
 )
 
-func Init() error {
+func Register(key string, f GetCache) {
+	cacheMap[key] = f
+}
 
-	cfg := &config.Cache{}
-	if err := viper.UnmarshalKey("cache", &cfg); err != nil {
-		return err
-	}
+func Init(cfg *config.Cache) error {
+
 	switch cfg.Type {
 	case types.CacheRedis:
 		cache = redis.New(types.GetRedis(cfg))
 	case types.CacheLocal:
 		cache = local.New(types.GetLocal(cfg))
+	default:
+		if f, ok := cacheMap[cfg.Type]; ok {
+			cache = f(cfg)
+		}
 	}
 	return nil
 }

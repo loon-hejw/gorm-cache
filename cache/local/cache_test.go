@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hejw123/gorm-cache/cache/types"
+	"github.com/loon-hejw/gorm-cache/cache/types"
 )
 
 type TestData struct {

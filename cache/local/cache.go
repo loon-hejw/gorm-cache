@@ -8,7 +8,7 @@ import (
 
 	"github.com/patrickmn/go-cache"
 
-	"github.com/hejw123/gorm-cache/cache/types"
+	"github.com/loon-hejw/gorm-cache/cache/types"
 )
 
 type inmemory struct {

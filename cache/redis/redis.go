@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/hejw123/gorm-cache/cache/types"
+	"github.com/loon-hejw/gorm-cache/cache/types"
 
 	rv9 "github.com/redis/go-redis/v9"
 )

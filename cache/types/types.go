@@ -3,7 +3,7 @@ package types
 import (
 	"time"
 
-	"github.com/hejw123/gorm-cache/config"
+	"github.com/loon-hejw/gorm-cache/config"
 )
 
 const (

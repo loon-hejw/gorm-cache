@@ -8,7 +8,7 @@ package main
 import (
 	"context"
 
-	"github.com/hejw123/gorm-cache/cache"
+	"github.com/loon-hejw/gorm-cache/cache"
 	"gorm.io/gorm"
 )
 

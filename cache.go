@@ -12,7 +12,7 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/callbacks"
 
-	store "github.com/hejw123/gorm-cache/cache"
+	store "github.com/loon-hejw/gorm-cache/cache"
 
 	json "github.com/json-iterator/go"
 )
@@ -155,6 +155,6 @@ func generateKey(key string) string {
 	return strconv.FormatUint(hash.Sum64(), 36)
 }
 
-func NonuseCache(ctx context.Context) context.Context {
+func Unuse(ctx context.Context) context.Context {
 	return context.WithValue(ctx, noCache, true)
 }
